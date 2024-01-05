@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="checkout_cart_update_items_before">
+        <observer name="piy_update_cart_item_ribbon_text"
+                  instance="PiyRibbons\PiyOnline\Observer\Checkout\Cart\UpdateItemsRibbonText"/>
+    </event>
+</config>

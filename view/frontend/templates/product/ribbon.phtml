@@ -1,0 +1,73 @@
+<?php
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+use PiyRibbons\PiyOnline\Model\Config;
+use PiyRibbons\PiyOnline\ViewModel\Product\Form\Ribbon;
+
+/**
+ * @var Template $block
+ * @var Escaper $escaper
+ * @var Ribbon $viewModel
+ */
+$viewModel = $block->getViewModel();
+$fontFamilies = $viewModel->getFontOptions();
+$fontSources = $viewModel->getFontSources();
+$allowEmojis = $viewModel->isEmojiAllowed();
+$emojiPickerEnabled = $viewModel->isEmojiPickerEnabled();
+?>
+<?php if ($viewModel->shouldRender()): ?>
+<div class="control">
+    <a class="action action-edit-ribbon"
+       title="<?= $escaper->escapeHtmlAttr(__('Personalised ribbon')) ?>">
+        <span><?= $escaper->escapeHtml(__('Add personalised ribbon')) ?></span>
+    </a>
+    <div class="piy-ribbon-input-wrapper">
+        <?php if (count($fontFamilies) > 1): ?>
+        <div class="control piy-ribbon-font-input">
+            <style>
+                <?php foreach ($fontFamilies as $id => $fontFamily): ?>
+                @import url("<?= $fontSources[$id] ?>");
+                <?php endforeach; ?>
+            </style>
+            <label for="<?= $escaper->escapeHtmlAttr(Config::PIY_RIBBON_FONT_INPUT_NAME) ?>" class="label">
+                <?= __('Pick a font') ?>
+            </label>
+            <select
+                name="<?= $escaper->escapeHtmlAttr(Config::PIY_RIBBON_FONT_INPUT_NAME) ?>"
+                id="<?= $escaper->escapeHtmlAttr(Config::PIY_RIBBON_FONT_INPUT_NAME) ?>"
+                class="input-select select">
+                <?php foreach ($fontFamilies as $id => $fontFamily): ?>
+                    <option value="<?= $escaper->escapeHtmlAttr($id) ?>" style="font-size: 20px; font-family: <?= $escaper->escapeHtmlAttr($fontFamily) ?>">
+                        <?= $escaper->escapeHtml($fontFamily) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <?php endif; ?>
+        <div class="control piy-ribbon-text-input">
+            <label for="<?= $escaper->escapeHtmlAttr(Config::PIY_RIBBON_TEXT_INPUT_NAME) ?>" class="label">
+                <?= __('Customise your ribbon text') ?>
+            </label>
+            <input type="text"
+                   title="<?= $escaper->escapeHtmlAttr(__('Your personalised ribbon text')) ?>"
+                   placeholder="<?= $escaper->escapeHtmlAttr(__('Add your personalised ribbon text...')) ?>"
+                   id="<?= $escaper->escapeHtmlAttr(Config::PIY_RIBBON_TEXT_INPUT_NAME) ?>"
+                   name="<?= $escaper->escapeHtmlAttr(Config::PIY_RIBBON_TEXT_INPUT_NAME) ?>"
+                   value=""
+                   class="input-text<?= $emojiPickerEnabled ? ' with-emoji-picker' : '' ?>"
+                   <?= !$allowEmojis ? 'data-validate="{\'validate-no-emojis\': true}"' : '' ?>
+            />
+            <?php if ($emojiPickerEnabled): ?>
+            <div class="emoji-picker-trigger">
+                <span>😊</span>
+            </div>
+            <?php endif; ?>
+        </div>
+        <?php if ($emojiPickerEnabled): ?>
+        <div class="emoji-picker">
+            <emoji-picker id="emoji-picker"></emoji-picker>
+        </div>
+        <?php endif; ?>
+    </div>
+</div>
+<?php endif; ?>

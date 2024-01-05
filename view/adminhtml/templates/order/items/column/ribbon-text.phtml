@@ -1,0 +1,19 @@
+<?php
+use Magento\Framework\Escaper;
+use Magento\Sales\Block\Adminhtml\Items\Column\DefaultColumn;
+use PiyRibbons\PiyOnline\Model\Config;
+
+/**
+ * @var $block DefaultColumn
+ * @var $escaper Escaper
+ */
+
+$item = $block->getItem();
+$ribbonText = $item->getBuyRequest()->getData(Config::PIY_RIBBON_TEXT_INPUT_NAME);
+
+?>
+<?php if ($ribbonText) : ?>
+    <p>
+        <?= $escaper->escapeHtml($ribbonText) ?>
+    </p>
+<?php endif; ?>

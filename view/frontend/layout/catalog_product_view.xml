@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <script src="PiyRibbons_PiyOnline::js/ribbon-editor.js"/>
+    </head>
+    <body>
+        <referenceBlock name="product.info.addtocart">
+            <block name="product.info.form.options.piy.ribbon" template="PiyRibbons_PiyOnline::product/ribbon.phtml">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">\PiyRibbons\PiyOnline\ViewModel\Product\Form\Ribbon</argument>
+                </arguments>
+                <action method="unsetData">
+                    <argument name="key" xsi:type="string">cache_lifetime</argument>
+                </action>
+                <action method="unsetData">
+                    <argument name="key" xsi:type="string">cache_tags</argument>
+                </action>
+            </block>
+        </referenceBlock>
+        <referenceBlock name="product.info.addtocart.additional">
+            <block name="product.info.additional.piy.ribbon" template="PiyRibbons_PiyOnline::product/ribbon.phtml">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">\PiyRibbons\PiyOnline\ViewModel\Product\Form\Ribbon</argument>
+                </arguments>
+                <action method="unsetData">
+                    <argument name="key" xsi:type="string">cache_lifetime</argument>
+                </action>
+                <action method="unsetData">
+                    <argument name="key" xsi:type="string">cache_tags</argument>
+                </action>
+            </block>
+        </referenceBlock>
+        <referenceBlock name="product.info.addtocart.bundle">
+            <block name="product.info.bundle.piy.ribbon" template="PiyRibbons_PiyOnline::product/ribbon.phtml">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">\PiyRibbons\PiyOnline\ViewModel\Product\Form\Ribbon</argument>
+                </arguments>
+                <action method="unsetData">
+                    <argument name="key" xsi:type="string">cache_lifetime</argument>
+                </action>
+                <action method="unsetData">
+                    <argument name="key" xsi:type="string">cache_tags</argument>
+                </action>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="sales_order">
+        <column xsi:type="int" name="has_ribbon_text" unsigned="true" nullable="false" default="0"
+                comment="Indicates if the order should be pushed to the PIY dashboard"/>
+        <column xsi:type="int" name="pushed_to_piy" unsigned="true" nullable="false" default="0"
+                comment="Indicates if the order was pushed to the PIY dashboard"/>
+    </table>
+</schema>

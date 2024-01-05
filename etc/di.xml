@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Catalog\Model\Product\Type\AbstractType">
+        <plugin name="piy_online_add_ribbon_data_to_cart_candidate"
+                type="PiyRibbons\PiyOnline\Plugin\Product\AddRibbonDataToCartCandidate"
+                sortOrder="10"/>
+    </type>
+    <type name="Magento\Quote\Model\Quote\Item">
+        <plugin name="piy_online_unique_cart_item_for_ribbon"
+                type="PiyRibbons\PiyOnline\Plugin\Quote\Item\UniqueCartItemForRibbon"
+                sortOrder="10"/>
+    </type>
+    <type name="Magento\Framework\Pricing\Adjustment\Collection">
+        <arguments>
+            <argument name="adjustments" xsi:type="array">
+                <item name="piy_ribbon" xsi:type="const">PiyRibbons\PiyOnline\Pricing\Adjustment::ADJUSTMENT_CODE</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\Pricing\Adjustment\Pool">
+        <arguments>
+            <argument name="adjustments" xsi:type="array">
+                <item name="piy_ribbon" xsi:type="array">
+                    <item name="className" xsi:type="string">PiyRibbons\PiyOnline\Pricing\Adjustment</item>
+                    <item name="sortOrder" xsi:type="string">10</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+</config>

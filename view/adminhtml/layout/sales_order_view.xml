@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="order_totals">
+            <block class="PiyRibbons\PiyOnline\Block\Sales\Order\Totals" name="piy_ribbon_total">
+                <action method="setBeforeCondition">
+                    <argument name="condition" xsi:type="string">tax</argument>
+                </action>
+            </block>
+        </referenceBlock>
+        <referenceBlock name="order_items">
+            <arguments>
+                <argument name="columns" xsi:type="array">
+                    <item name="piy-ribbon-text" xsi:type="string" translate="true">PIY Ribbon Text</item>
+                </argument>
+            </arguments>
+            <referenceBlock name="default_order_items_renderer">
+                <arguments>
+                    <argument name="columns" xsi:type="array">
+                        <item name="piy-ribbon-text" xsi:type="string" translate="false">col-piy-ribbon-text</item>
+                    </argument>
+                </arguments>
+            </referenceBlock>
+            <block class="Magento\Sales\Block\Adminhtml\Items\Column\DefaultColumn" name="column_piy-ribbon-text" template="PiyRibbons_PiyOnline::order/items/column/ribbon-text.phtml" group="column"/>
+        </referenceBlock>
+    </body>
+</page>

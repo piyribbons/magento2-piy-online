@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="piy_ribbons" translate="label" sortOrder="500">
+            <label>PIY Ribbons</label>
+        </tab>
+        <section id="piy_ribbons" showInDefault="1" showInWebsite="0" showInStore="0" sortOrder="10" translate="label">
+            <label>PIY Online</label>
+            <tab>piy_ribbons</tab>
+            <resource>PiyRibbons_PiyOnline::configuration</resource>
+            <group id="general" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="enabled" translate="title comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>If enabled, customers will be able to add text which can be printed on a customisable ribbon through the PIY Ribbons Dashboard</comment>
+                </field>
+                <field id="allow_emojis" translate="title comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow Emojis</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Indicate whether people should be able to add emojis to their ribbon text</comment>
+                </field>
+                <field id="enable_emoji_picker" translate="title comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Emoji Picker</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>If enabled, an emoji picker will be shown next to the ribbon text input field</comment>
+                    <depends>
+                        <field id="allow_emojis">1</field>
+                    </depends>
+                </field>
+                <field id="default_template" translate="title comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Default Template</label>
+                    <source_model>\PiyRibbons\PiyOnline\Model\Product\Attribute\Source\Template</source_model>
+                    <comment>Which template should be used by default for printing ribbons</comment>
+                </field>
+                <field id="default_font" translate="title comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Default Font</label>
+                    <source_model>\PiyRibbons\PiyOnline\Model\Config\Source\Font</source_model>
+                    <comment>Which font should be used by default for printing ribbons</comment>
+                </field>
+                <field id="allow_for" translate="title comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow Ribbons for</label>
+                    <source_model>\PiyRibbons\PiyOnline\Model\Config\Source\AllowRibbon</source_model>
+                    <comment>Indicate where users should be allowed to add a ribbon.</comment>
+                </field>
+                <field id="allow_for_categories" translate="title comment" type="multiselect" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allowed Categories</label>
+                    <source_model>\PiyRibbons\PiyOnline\Model\Config\Source\Category</source_model>
+                    <comment>Indicate on which categories users should be allowed to add a ribbon.</comment>
+                    <depends>
+                        <field id="allow_for">2</field>
+                    </depends>
+                </field>
+                <field id="allow_for_attribute_sets" translate="title comment" type="multiselect" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allowed Categories</label>
+                    <source_model>\PiyRibbons\PiyOnline\Model\Config\Source\AttributeSet</source_model>
+                    <comment>Indicate on which categories users should be allowed to add a ribbon.</comment>
+                    <depends>
+                        <field id="allow_for">3</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="orders" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Orders</label>
+                <field id="push_status" translate="title comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Push orders with status</label>
+                    <source_model>Magento\Sales\Model\Config\Source\Order\Status</source_model>
+                    <comment>Indicate which status an order should have for it to be pushed to the PIY Ribbons Dashboard</comment>
+                </field>
+            </group>
+            <group id="pricing" translate="label" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Pricing</label>
+                <field id="enable_adjustment" translate="title comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable price adjustment</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Indicates if a price adjustment should be applied when a ribbon is added to an item.</comment>
+                </field>
+                <field id="adjustment_value" translate="title comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Price adjustment</label>
+                    <comment>Indicate by how much the price of an item should be adjusted if a ribbon is added. Use a dot "." to add decimals.</comment>
+                    <validate>validate-zero-or-greater validate-number</validate>
+                    <depends>
+                        <field id="enable_adjustment">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="dashboard" translate="label" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Dashboard</label>
+                <field id="api_key" translate="title comment" type="obscure" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>API Key</label>
+                    <comment><![CDATA[The API Key for connecting to the <a href="https://dashboard.piyribbons.com/" target="_blank">PIY Ribbons Dashboard</a>.]]></comment>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+            </group>
+            <group id="development" translate="label" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Development</label>
+                <field id="htaccess_user" translate="title comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Htaccess User</label>
+                    <comment><![CDATA[<strong class="colorRed">For development purposes only.</strong> The htpasswd username]]></comment>
+                </field>
+                <field id="htaccess_password" translate="title comment" type="obscure" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Htaccess Password</label>
+                    <comment><![CDATA[<strong class="colorRed">For development purposes only.</strong> The htpasswd password]]></comment>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

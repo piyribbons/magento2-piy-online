@@ -1,0 +1,72 @@
+.action-edit-ribbon {
+    cursor: pointer;
+
+    &:after {
+        content: "\25b2";
+        color: gray;
+    }
+
+    &.opened:after {
+        content: "\25bc";
+    }
+}
+
+.piy-ribbon-input-wrapper {
+    position: relative;
+
+    .piy-ribbon-font-input,
+    .piy-ribbon-text-input {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin: 10px 0;
+
+        > label {
+            flex-basis: 100%;
+        }
+
+        > input {
+            flex-basis: 100%;
+        }
+
+        > input.with-emoji-picker {
+            flex-basis: 90%;
+        }
+
+        .emoji-picker-trigger {
+            font-size: 2rem;
+            cursor: pointer;
+        }
+    }
+}
+
+emoji-picker {
+    z-index: 999;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    --emoji-size: 2rem;
+}
+
+@media screen and (max-width: 960px) {
+    .piy-ribbon-input-wrapper {
+
+        .piy-ribbon-font-input,
+        .piy-ribbon-text-input {
+            > input.with-emoji-picker {
+                flex-basis: 100%;
+            }
+
+            .emoji-picker-trigger {
+                display: none;
+            }
+        }
+    }
+
+    emoji-picker {
+        display: none !important;
+    }
+}

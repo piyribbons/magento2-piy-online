@@ -1,0 +1,77 @@
+<?php
+use Magento\Framework\Escaper;
+use PiyRibbons\PiyOnline\Block\Cart\Item\Renderer\Actions\EditRibbon;
+use PiyRibbons\PiyOnline\Model\Config;
+use PiyRibbons\PiyOnline\ViewModel\Cart\Form\Ribbon;
+
+/**
+ * @var $block EditRibbon
+ * @var $escaper Escaper
+ * @var $viewModel Ribbon
+ */
+$viewModel = $block->getViewModel();
+$cartItem = $block->getItem();
+$ribbonTextInputKey = Config::PIY_RIBBON_TEXT_INPUT_NAME;
+$ribbonFontInputKey = Config::PIY_RIBBON_FONT_INPUT_NAME;
+$existingTextValue = $viewModel->getExistingValue($cartItem);
+$existingFontValue = $viewModel->getExistingFont($cartItem);
+$editRibbonLabel = $existingTextValue ? __('Edit personalised ribbon') : __('Add personalised ribbon');
+$fontFamilies = $viewModel->getFontOptions();
+$fontSources = $viewModel->getFontSources();
+$allowEmojis = $viewModel->isEmojiAllowed();
+$emojiPickerEnabled = $viewModel->isEmojiPickerEnabled();
+?>
+<?php if ($this->isProductVisibleInSiteVisibility() && $viewModel->shouldRender($cartItem->getProduct())) :?>
+    <style>
+    <?php foreach ($fontFamilies as $id => $fontFamily): ?>
+        @import url("<?= $fontSources[$id] ?>");
+    <?php endforeach; ?>
+    </style>
+    <a class="action action-edit-ribbon"
+       title="<?= $escaper->escapeHtmlAttr(__('Personalised ribbon')) ?>">
+        <span><?= $escaper->escapeHtml($editRibbonLabel) ?></span>
+    </a>
+    <div class="piy-ribbon-input-wrapper">
+        <div class="control piy-ribbon-font-input">
+            <label for="cart[<?= $block->getItem()->getId() ?>][<?= $ribbonFontInputKey ?>]" class="label">
+                <?= __('Pick a font') ?>
+            </label>
+            <select
+                name="cart[<?= $block->getItem()->getId() ?>][<?= $ribbonFontInputKey ?>]"
+                id="cart-<?= $block->getItem()->getId() ?>-<?= $ribbonFontInputKey ?>"
+                class="input-select select">
+                <?php foreach ($fontFamilies as $id => $fontFamily): ?>
+                    <option style="font-size: 20px; font-family: <?= $escaper->escapeHtmlAttr($fontFamily) ?>"
+                        value="<?= $escaper->escapeHtmlAttr($id) ?>"
+                        <?= $id === $existingFontValue ? ' selected' : '' ?>>
+                        <?= $escaper->escapeHtml($fontFamily) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <div class="control piy-ribbon-text-input">
+            <label for="cart[<?= $block->getItem()->getId() ?>][<?= $ribbonTextInputKey ?>]" class="label">
+                <?= __('Customise your ribbon text') ?>
+            </label>
+            <input type="text"
+                   title="<?= __('Your personalised ribbon text') ?>"
+                   placeholder="<?= __('Add your personalised ribbon text...') ?>"
+                   id="cart-<?= $block->getItem()->getId() ?>-<?= $ribbonTextInputKey ?>"
+                   name="cart[<?= $block->getItem()->getId() ?>][<?= $ribbonTextInputKey ?>]"
+                   value="<?= $escaper->escapeHtmlAttr($existingTextValue) ?>"
+                   class="input-text<?= $emojiPickerEnabled ? ' with-emoji-picker' : '' ?>"
+                   <?= !$allowEmojis ? 'data-validate="{\'validate-no-emojis\': true}"' : '' ?>
+            />
+            <?php if ($emojiPickerEnabled): ?>
+            <div class="emoji-picker-trigger">
+                <span>😊</span>
+            </div>
+            <?php endif; ?>
+        </div>
+        <?php if ($emojiPickerEnabled): ?>
+        <div class="emoji-picker">
+            <emoji-picker id="cart[<?= $escaper->escapeHtmlAttr($block->getItem()->getId()) ?>]"></emoji-picker>
+        </div>
+        <?php endif; ?>
+    </div>
+<?php endif ?>

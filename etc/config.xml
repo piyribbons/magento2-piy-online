@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <piy_ribbons>
+            <general>
+                <enabled>1</enabled>
+                <allow_for>1</allow_for>
+                <allow_emojis>1</allow_emojis>
+                <enable_emoji_picker>1</enable_emoji_picker>
+            </general>
+            <orders>
+                <push_status>processing</push_status>
+            </orders>
+            <pricing>
+                <enable_adjustment>0</enable_adjustment>
+                <adjustment_value>0.00</adjustment_value>
+            </pricing>
+            <dashboard>
+                <htaccess_password backend_model="Magento\Config\Model\Config\Backend\Encrypted" />
+                <api_key backend_model="Magento\Config\Model\Config\Backend\Encrypted" />
+            </dashboard>
+            <development>
+                <htaccess_password backend_model="Magento\Config\Model\Config\Backend\Encrypted" />
+                <api_base_url>https://piyribbons.com/dashboard/api/</api_base_url>
+            </development>
+        </piy_ribbons>
+    </default>
+</config>
