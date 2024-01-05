@@ -1,6 +1,5 @@
 {
   "name": "piy-ribbons/module-magento2-piy-online",
-  "version": "1.0.0",
   "description": "Adds the ability for your customers to add customisable ribbons to their order items. The orders are exported to the PIY Dashboard, from where order pickers can print the customizaed ribbons",
   "type": "magento2-module",
   "require": {
