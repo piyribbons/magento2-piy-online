@@ -2,9 +2,10 @@
 This plugin will implement the PIY Online functionality in your Magento 2 store. It allows customers to add personalised ribbons to their orders, which can then be printed using the PIY Online Dashboard.
 
 ## Installation
-You can install this plugin using Composer:
+You can install this plugin using Composer by adding the repository and requiring it:
 ```
-composer require piyribbons/magento2-piy-online
+composer config repositories.piy-ribbons git https://github.com/piyribbons/magento2-piy-online.git
+composer require piy-ribbons/module-magento2-piy-online
 ```
 
 To enable the plugin in your store run the following commands:
