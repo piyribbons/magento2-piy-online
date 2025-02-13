@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Cache/etc/cache.xsd">
+    <type name="piy_dashboard_api" translate="label,description" instance="PiyRibbons\PiyOnline\Model\Cache\Type\DashboardApi">
+        <label>PIY Dashboard API</label>
+        <description>Holds data which is retrieved from the PIY Dashboard API</description>
+    </type>
+</config>
