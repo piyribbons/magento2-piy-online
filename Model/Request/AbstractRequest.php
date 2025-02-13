@@ -102,7 +102,11 @@ class AbstractRequest
             $result = false;
         }
 
-        $response = $this->json->unserialize($response->getBody()->getContents());
+        try {
+            $response = $this->json->unserialize($response->getBody()->getContents());
+        } catch (InvalidArgumentException $e) {
+            $response = [];
+        }
 
         return [$result, $response];
     }
